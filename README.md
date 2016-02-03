@@ -3,19 +3,27 @@ Files for a beginners course in LaTeX. The structure is 3 lectures each being 3 
 
 Lecture 1: Introduction to LaTeX
 --
-* item 1
-* item 2
-* item 3
+* What is LaTeX: Short introduction
+* The editor and the LaTeX-distribution
+* Compiling your first document
+* Chapters and sections
+* Formatting text and some useful commands (e.g. an itemized list)
+* The preamble
+* Table of contents
+* Some notes about collaborative work in LaTeX (e.g. the subfile package)
 
 Lecture 2: Figures, Tables & Math
 --
-* item 1
-* item 2
-* item 3
+* Introduction to how figures and tables are handled in LaTeX
+* Captions and labels
+* Referencing your figures and tables
+* Minipages as subfigures
+* Basic math
 
-Lecture 3: References and BibTex
+Lecture 3: References and BibTeX
 --
-* item 1
-* item 2
-* item 3
-
+* Introduction to BibTEX
+* Structure of a .bib file
+* Using and formatting references
+* Getting citations from [google scholar](https://scholar.google.dk/)
+* Outlook, some helpful hints and references
