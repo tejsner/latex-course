@@ -1,0 +1,77 @@
+\documentclass[a4paper,oneside]{memoir}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage{geometry}
+\usepackage{url}
+\counterwithout{section}{chapter}
+\usepackage{xcolor}
+\usepackage{listings}
+\setlength\parskip{0.1 cm}
+\setlength\parindent{0pt}
+
+\lstset
+{
+    language=[LaTeX]TeX,
+    breaklines=true,
+    basicstyle=\ttfamily,
+    keywordstyle=\color{blue},
+    identifierstyle=\color{black},
+    morekeywords={chapter, subsection, subsubsection, chapterstyle}
+}
+
+
+\begin{document}
+\section{Compiling your first document}
+Create a .tex file in Texmaker and paste the following lines into the empty file:
+
+\begin{quote}
+\begin{lstlisting}
+\documentclass{memoir}
+\begin{document}
+Hello world!
+\end{document}
+\end{lstlisting}
+\end{quote}
+
+\noindent Try compiling the document. Do you see a pdf file with the words \enquote{Hello World!}?
+
+\section{Basic text formatting}
+
+\begin{itemize}
+\item \textbf{Bold} text is done using \lstinline$\textbf{text}$
+\item \emph{Italic} (or emphasized) text is done using \lstinline$\emph{text}$
+\end{itemize}
+
+For anything to show up in your document, it needs to be placed between \lstinline$\begin{document}$ and \lstinline$\end{document}$! Play around with these commands and ensure that they work.
+
+\section{Chapters and sections}
+To structure your document, use \LaTeX{} commands to create chapters and sections. A chapter is created using \lstinline$\chapter{text}$ and a section with \lstinline$\section{text}$. Chapters are divided into sections and are numbered as such. For more levels of structure, you can use \lstinline$\subsection{text}$ and \lstinline$\subsubsection{text}$. To prevent a chapter from showing up in the table of contents use \lstinline$\chapter*{text}$ and equivalently for sections etc.
+
+Create three chapters, \enquote{Abstract}, \enquote{Introduction} and \enquote{Theory}. Make sure the abstract isn't listed in the table of contents. Make some sections in the introduction in order to understand the concepts. Add the line \lstinline$\tableofcontents$ just after \lstinline$\begin{document}$ to generate a table of contents. 
+
+Fill out the document with some text to see how it looks. Use your own or generate some dummy text using \url{http://www.lipsum.com/}
+
+\section{Bullet points}
+
+\section{Adding some formatting}
+Everything before \lstinline$\begin{document}$ is generally used to define some general characteristics about your document. This part of the document is known as the \enquote{preamble}. Try adding the following lines to your document (after \lstinline$\documentclass$ and before \lstinline$\begin{document}$:
+
+\begin{quote}
+\begin{lstlisting}
+\usepackage{geometry}
+\chapterstyle{section}
+\usepackage{microtype}
+\usepackage[english]{babel}
+\end{lstlisting}
+\end{quote}
+
+Also change the documentclass to \lstinline$\documentclass[a4paper,oneside]{memoir}$.
+
+\section{Collaborative work}
+
+\section{Introduction toreferences}
+
+
+
+\end{document}
