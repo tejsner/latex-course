@@ -25,7 +25,7 @@
 \begin{document}
 
 \section{Compiling your first document}
-Create a .tex file in Texmaker and paste the following lines into the empty file:
+Create a  new file in Texmaker and and save it as \texttt{main.tex}. Type the following lines into the empty file:
 
 \begin{quote}
 \begin{lstlisting}
@@ -36,7 +36,7 @@ Hello world!
 \end{lstlisting}
 \end{quote}
 
-\noindent Save the file as \texttt{main.tex} anywhere on your computer. Try compiling the document. Do you see a pdf file with the words \enquote{Hello World!}?
+\noindent Try building the document by selecting \enquote{Tools} and then \enquote{Quick Build} in the menu bar. Do you see a pdf file with the words \enquote{Hello World!}?
 
 \section{Basic text formatting}
 
@@ -46,14 +46,14 @@ Hello world!
 \item \emph{Italic} (or emphasized) text is done using \lstinline$\emph{text}$
 \end{itemize}
 
-For anything to show up in your document, it needs to be placed between \lstinline$\begin{document}$ and \lstinline$\end{document}$! Play around with these commands and ensure that they work.
+For anything to show up in your document, it needs to be placed between \lstinline$\begin{document}$ and \lstinline$\end{document}$! Play around with these commands, type in some text and build your document again.
 
 \section{Chapters and sections}
-To structure your document, use \LaTeX{} commands to create chapters and sections. A chapter is created using \lstinline$\chapter{text}$ and a section with \lstinline$\section{text}$. Chapters start on a new page and are divided into sections and are numbered as such. For more levels of structure, you can use \lstinline$\subsection{text}$ and \lstinline$\subsubsection{text}$. To prevent a chapter from showing up in the table of contents use \lstinline$\chapter*{text}$ and equivalently for sections etc.
+To structure your document, we use \LaTeX{} commands to create chapters and sections. A chapter is created using \lstinline$\chapter{text}$ and a section with \lstinline$\section{text}$. Chapters start on a new page and are divided into sections and are numbered as such. For more levels of structure, you can use \lstinline$\subsection{text}$ and \lstinline$\subsubsection{text}$. To prevent a chapter from showing up in the table of contents use \lstinline$\chapter*{text}$ and equivalently for sections etc.
 
-Create three chapters, \enquote{Abstract}, \enquote{Introduction} and \enquote{Theory}. Make sure the abstract isn't listed in the table of contents. Make some sections in the introduction in order to understand the concepts. Add the line \lstinline$\tableofcontents*$ just after \lstinline$\begin{document}$ to generate a table of contents. 
+Create three chapters, \enquote{Abstract}, \enquote{Introduction} and \enquote{Theory} in your \texttt{main.tex}. Make sure the abstract isn't listed in the table of contents. Make some sections in the introduction in order to understand the concepts. Add the line \lstinline$\tableofcontents*$\footnote{The asterisks is to ensure the table of contents isn't listed in the table of contents!} just after \lstinline$\begin{document}$ to generate a table of contents.
 
-Fill out the document with some text to see how it looks. Use your own or generate some dummy text using \url{http://www.lipsum.com/}. Your document should look something like this:
+Fill out the chapters and sections with some text. Use your own or generate some dummy text using \url{http://www.lipsum.com/}. Your \texttt{main.tex} should now look something like this:
 
 \begin{quote}
 \begin{lstlisting}
@@ -73,7 +73,7 @@ content of theory
 \end{quote}
 
 \section{Bullet points}
-To make bullet points, add the following to your document:
+To make a list of bullet points, add the following to your document in the desired location:
 
 \begin{quote}
 \begin{lstlisting}
@@ -103,12 +103,12 @@ Also change the documentclass to \lstinline$\documentclass[a4paper,oneside]{memo
 
 The \lstinline$\usepackage$ command loads packages for use in our document. The \texttt{geometry} package helps us by setting some good defaults for the geometry of the page -- margins etc. The \texttt{microtype} package improves the rendering of fonts. The \texttt{babel} package offers language support and makes sure that automatically generated words, date/time, hyphenation patterns etc. reflect the language of the document. When writing a danish report, simply change the parameter \texttt{english} to \texttt{danish}.
 
-The \lstinline$\chapterstyle$ command, unsurprisingly, sets a style for the chapters in our document. Using the style \texttt{section} simply makes the chapter headline look like the section headlines (albeit a bit bigger). Try changing this style to \texttt{verville} for a different style and see how it affects your document.
+The \lstinline$\chapterstyle$\footnote{this is a feature of the memoir class and will not work with standard \LaTeX{} document classes} command, unsurprisingly, sets a style for the chapters in our document. Using the style \texttt{section} simply makes the chapter headline look like the section headlines (albeit a bit bigger). Try changing this style to \texttt{verville} for a different style and see how it affects your document.
 
 The optional parameters \texttt{a4paper} and \texttt{oneside} in the \lstinline$\documentclass$ tells \LaTeX to generate the pdf on a4 paper meant to be printed on one-sided paper. If printing on both sides, you can change \texttt{oneside} to \texttt{twoside}. A two-sided document also makes sure that chapters always start on the right!
 
 \section{Paragraphs}
-Paragraphs in \LaTeX{} are separated by \emph{two} line returns. By default, the first paragraph in a chapter, section etc. is not indented, but every following paragraph is. The behaviour of this indentation can be changed in the \emph{preamble} using the following two commands:
+Paragraphs in \LaTeX{} are separated by \emph{two} line returns. By default, the first paragraph in a chapter, section etc. is not indented, but every following paragraph is. The behaviour of this indentation can be changed in the preamble using the following two commands:
 
 \begin{quote}
 \begin{lstlisting}
@@ -120,7 +120,7 @@ Paragraphs in \LaTeX{} are separated by \emph{two} line returns. By default, the
 Changing the length of \lstinline$\parskip$ changes the distance between paragraphs. Lengths in \LaTeX{} accept a variety of units and in this case we simply use centimetres. The length of \lstinline$\parindent$ changes the indentation of the paragraphs. In this case I simply removed it.
 
 \section{Adding a title}
-Add the following lines to the \emph{preamble}:
+Add the following lines to the preamble:
 
 \begin{quote}
 \begin{lstlisting}
@@ -143,7 +143,7 @@ Content here
 \end{lstlisting}
 \end{quote}
 
-In \texttt{main.tex}, our original file, the subfiles are then loaded using the \lstinline$\subfile$ command. The resulting \texttt{main.tex} should now look like this:
+Copy over the content to the relevant files. In \texttt{main.tex}, our original file, the subfiles are then loaded using the \lstinline$\subfile$ command. The resulting \texttt{main.tex} should now look like this:
 
 \begin{quote}
 \begin{lstlisting}
@@ -179,12 +179,12 @@ We will go into more detail with references later on, but the basics are actuall
 \end{lstlisting}
 \end{quote}
 
-Our section now has the label \texttt{sec:thermo}. When you want to reference this section, you simply use the command \lstinline$\ref{sec:thermo}$ to get the numerical value of that section. Usually you would write something like:
+The section \enquote{Thermodynamics} section now has the label \texttt{sec:thermo}. When you want to reference this section, you simply use the command \lstinline$\ref{sec:thermo}$ to get the numerical value (e.g. 1.3) of that section. Usually you would write something like:
 
 \begin{quote}
-\dots as shown in section \lstinline$\ref{sec:thermo}$ \dots
+\lstinline$... as shown in section \ref{sec:thermo} ...$
 \end{quote}
 
-Try adding some labels and references to your document. You may have to build the document twice in order for the references to work correctly. The \LaTeX{} interpreter will usually warn you if this is the case.
+In your \texttt{.tex} file. Try adding some labels and references to your document. You may have to build the document twice in order for the references to work correctly. The \LaTeX{} interpreter will usually warn you if this is the case.
 
 \end{document}
