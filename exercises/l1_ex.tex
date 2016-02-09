@@ -17,11 +17,13 @@
     basicstyle=\ttfamily,
     keywordstyle=\color{blue},
     identifierstyle=\color{black},
-    morekeywords={chapter, subsection, subsubsection, chapterstyle, maketitle}
+    morekeywords={chapter, subsection, subsubsection, chapterstyle, maketitle, setlength,
+    			  tableofcontents, subfile}
 }
 
 
 \begin{document}
+
 \section{Compiling your first document}
 Create a .tex file in Texmaker and paste the following lines into the empty file:
 
@@ -34,11 +36,12 @@ Hello world!
 \end{lstlisting}
 \end{quote}
 
-\noindent Try compiling the document. Do you see a pdf file with the words \enquote{Hello World!}?
+\noindent Save the file as \texttt{main.tex} anywhere on your computer. Try compiling the document. Do you see a pdf file with the words \enquote{Hello World!}?
 
 \section{Basic text formatting}
 
 \begin{itemize}
+\item Normal text is done by simply writing it as-is
 \item \textbf{Bold} text is done using \lstinline$\textbf{text}$
 \item \emph{Italic} (or emphasized) text is done using \lstinline$\emph{text}$
 \end{itemize}
@@ -46,11 +49,28 @@ Hello world!
 For anything to show up in your document, it needs to be placed between \lstinline$\begin{document}$ and \lstinline$\end{document}$! Play around with these commands and ensure that they work.
 
 \section{Chapters and sections}
-To structure your document, use \LaTeX{} commands to create chapters and sections. A chapter is created using \lstinline$\chapter{text}$ and a section with \lstinline$\section{text}$. Chapters are divided into sections and are numbered as such. For more levels of structure, you can use \lstinline$\subsection{text}$ and \lstinline$\subsubsection{text}$. To prevent a chapter from showing up in the table of contents use \lstinline$\chapter*{text}$ and equivalently for sections etc.
+To structure your document, use \LaTeX{} commands to create chapters and sections. A chapter is created using \lstinline$\chapter{text}$ and a section with \lstinline$\section{text}$. Chapters start on a new page and are divided into sections and are numbered as such. For more levels of structure, you can use \lstinline$\subsection{text}$ and \lstinline$\subsubsection{text}$. To prevent a chapter from showing up in the table of contents use \lstinline$\chapter*{text}$ and equivalently for sections etc.
 
 Create three chapters, \enquote{Abstract}, \enquote{Introduction} and \enquote{Theory}. Make sure the abstract isn't listed in the table of contents. Make some sections in the introduction in order to understand the concepts. Add the line \lstinline$\tableofcontents$ just after \lstinline$\begin{document}$ to generate a table of contents. 
 
-Fill out the document with some text to see how it looks. Use your own or generate some dummy text using \url{http://www.lipsum.com/}
+Fill out the document with some text to see how it looks. Use your own or generate some dummy text using \url{http://www.lipsum.com/}. Your document should look something like this:
+
+\begin{quote}
+\begin{lstlisting}
+\documentclass{memoir}
+\begin{document}
+\tableofcontents
+\chapter*{Abstract}
+content of abstract
+\chapter{Introduction}
+content of introduction
+\section{Project structure}
+content of the project structure
+\chapter{Theory}
+content of theory
+\end{document}
+\end{lstlisting}
+\end{quote}
 
 \section{Bullet points}
 To make bullet points, add the following to your document:
@@ -65,21 +85,39 @@ To make bullet points, add the following to your document:
 \end{lstlisting}
 \end{quote}
 
-To have a numbered list, replace \texttt{itemize} with \texttt{enumerate}.
+To have a numbered list, replace \texttt{itemize} with \texttt{enumerate}. Try adding a list of bullet points somewhere in your introduction.
 
 \section{Adding some formatting}
-Everything before \lstinline$\begin{document}$ is generally used to define some general characteristics about your document. This part of the document is known as the \enquote{preamble}. Try adding the following lines to your document (after \lstinline$\documentclass$ and before \lstinline$\begin{document}$:
+Everything before \lstinline$\begin{document}$ is generally used to define some general characteristics about your document. This part of the document is known as the \emph{preamble}. Try adding the following lines to your document (after \lstinline$\documentclass$ and before \lstinline$\begin{document}$:
 
 \begin{quote}
 \begin{lstlisting}
 \usepackage{geometry}
-\chapterstyle{section}
 \usepackage{microtype}
 \usepackage[english]{babel}
+\chapterstyle{section}
 \end{lstlisting}
 \end{quote}
 
-Also change the documentclass to \lstinline$\documentclass[a4paper,oneside]{memoir}$.
+Also change the documentclass to \lstinline$\documentclass[a4paper,oneside]{memoir}$. The \lstinline$\usepackage$ command loads packages for use in our document.
+
+The \texttt{geometry} package helps us by setting some good defaults for the geometry of the page -- margins etc. The \texttt{microtype} package improves the rendering of fonts. The \texttt{babel} package offers language support and makes sure that automatically generated words, date/time, hyphenation patterns etc. reflect the language of the document. When writing a danish report, simply change the parameter \texttt{english} to \texttt{danish}.
+
+The \lstinline$\chapterstyle$ command, unsurprisingly, sets a style for the chapters in our document. Using the style \texttt{section} simply makes the chapter headline look like the section headlines (albeit a bit bigger). Try changing this style to \texttt{verville} for a different style and see how it affects your document.
+
+The optional parameters \texttt{a4paper} and \texttt{oneside} in the \lstinline$\documentclass$ tells \LaTeX to generate the pdf on a4 paper meant to be printed on one-sided paper. If printing on both sides, you can change \texttt{oneside} to \texttt{twoside}. A two-sided document also makes sure that chapters always start on the right!
+
+\section{Paragraphs}
+Paragraphs in \LaTeX{} are separated by \emph{two} line returns. By default, the first paragraph in a chapter, section etc. is not indented, but every following paragraph is. The behaviour of this indentation can be changed in the \emph{preamble} using the following two commands:
+
+\begin{quote}
+\begin{lstlisting}
+\setlength\parskip{0.1 cm}
+\setlength\parindent{0pt}
+\end{lstlisting}
+\end{quote}
+
+Changing the length of \lstinline$\parskip$ changes the distance between paragraphs. Lengths in \LaTeX{} accept a variety of units and in this case we simply use centimetres. The length of \lstinline$\parindent$ changes the indentation of the paragraphs. In this case I simply removed it.
 
 \section{Adding a title}
 Add the following lines to the \emph{preamble}:
@@ -94,9 +132,59 @@ Add the following lines to the \emph{preamble}:
 And add the command \lstinline$\maketitle$ just after \lstinline$\begin{document}$. If you want the title to be on its own page, add \lstinline$\clearpage$ after \lstinline$\maketile$
 
 \section{Collaborative work}
+In order to comfortably collaborate on a report, it can be advantageous to split the document up in a number of files, so people can work on different things without interrupting each other. A great way to do this is by using the \texttt{subfile} package. First load the package by adding \lstinline$\usepackage{subfile}$ to the preamble. We now want to load the three chapters from earlier into three separate files. Create \texttt{abstract.tex}, \texttt{intro.tex}, \texttt{theory.tex}. These \emph{subfiles} are structured in the following way:
+
+\begin{quote}
+\begin{lstlisting}
+\documentclass[main.tex]{subfiles}
+\begin{document}
+Content here
+\end{document}
+\end{lstlisting}
+\end{quote}
+
+In \texttt{main.tex}, our original file, the subfiles are then loaded using the \lstinline$\subfile$ command. The resulting \texttt{main.tex} should now look like this:
+
+\begin{quote}
+\begin{lstlisting}
+\documentclass[a4paper, oneside]{memoir}
+\usepackage{geometry}
+\usepackage{microtype}
+\usepackage{subfile}
+\usepackage[english]{babel}
+\setlength\parskip{0.1 cm}
+\setlength\parindent{0pt}
+\title{Your title}
+\author{Your name}
+\chapterstyle{section}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\subfile{abstract.tex}
+\subfile{intro.tex}
+\subfile{theory.tex}
+\end{document}
+\end{lstlisting}
+\end{quote}
+
+If you build \texttt{main.tex} you will get a \texttt{.pdf} of the entire document. If you build any of the subfiles, you will get a \texttt{.pdf} with the contents of the given chapter. Try it out!
 
 \section{Introduction to references}
+We will go into more detail with references later on, but the basics are actually quite simple! Lets say you want to reference a section called \enquote{Thermodynamics} in the \enquote{Theory} chapter. Label the section by writing
 
+\begin{quote}
+\begin{lstlisting}
+\section{Thermodynamics}\label{sec:thermo}
+\end{lstlisting}
+\end{quote}
 
+Our section now has the label \texttt{sec:thermo}. When you want to reference this section, you simply use the command \lstinline$\ref{sec:thermo}$ to get the numerical value of that section. Usually you would write something like:
+
+\begin{quote}
+\dots as shown in section \lstinline$\ref{sec:thermo}$ \dots
+\end{quote}
+
+Try adding some labels and references to your document. You may have to build the document twice in order for the references to work correctly. The \LaTeX{} interpreter will usually warn you if this is the case.
 
 \end{document}
