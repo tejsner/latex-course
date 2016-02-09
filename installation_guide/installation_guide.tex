@@ -1,0 +1,80 @@
+\documentclass[oneside, a4paper]{memoir}
+\setlength\parindent{0pt}
+\setsecnumdepth{section}
+\counterwithout{section}{chapter}
+\title{\LaTeX{} Installation Guide}
+\author{Tim Birger Tejsner}
+\usepackage{csquotes}
+\usepackage[english]{babel}
+\usepackage{url}
+\usepackage{geometry}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstset
+{
+    language=[LaTeX]TeX,
+    breaklines=true,
+    basicstyle=\ttfamily,
+    keywordstyle=\color{blue},
+    identifierstyle=\color{black},
+    morekeywords={chapter, subsection, subsubsection, chapterstyle}
+}
+
+\begin{document}
+
+\maketitle
+
+This document contains a short guide to install a working \LaTeX{} environment on your system. 
+
+\section{\LaTeX{} distribution}
+First we need a \LaTeX{} distribution. This is used to compile \texttt{.tex} files into viewable \texttt{.pdf} files.
+
+\subsection{Windows}
+\begin{itemize}
+\item Go to \url{http://miktex.org/download}.
+\item Download the \emph{Basic MikTeX Installer}.
+\item Run the installer and follow the on-screen instructions.
+\item Under \enquote{Install missing packages on-the-fly} choose \enquote{yes}.
+\end{itemize}
+
+\subsection{OSX}
+\begin{itemize}
+\item Go to \url{https://tug.org/mactex/mactex-download.html}
+\item Download \texttt{MacTeX.pkg}
+\item Double-click the file to install
+\end{itemize}
+
+\subsection{Linux}
+For Linux installations I recommend texlive located at \url{https://www.tug.org/texlive/}. Most Linux distributions have texlive in official repositories. For Ubuntu simply type 
+\begin{quote}
+\texttt{sudo apt-get install texlive-full}
+\end{quote}
+in a terminal window.
+
+
+\section{Texmaker}
+Texmaker is the editor we will use to write \LaTeX{} documents.
+
+\begin{itemize}
+\item Go to \url{http://www.xm1math.net/texmaker/download.html}
+\item Install the Version appropriate for your system.
+\end{itemize}
+
+\section{Testing the installation}
+Open Texmaker and create a new document. Paste the following into the editor:
+
+\begin{quote}
+\begin{lstlisting}
+\documentclass[a4paper]{memoir}
+\usepackage[utf8]{inputenc}
+\begin{document}
+Hello World!
+\[ \text{e}^{i\pi} = -1 \]
+\end{document}
+\end{lstlisting}
+\end{quote}
+
+Save the document. Go to \enquote{Tools} and chose \enquote{Quick Build}. This should generate your \texttt{.pdf}.
+
+\end{document}
