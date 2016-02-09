@@ -51,7 +51,7 @@ For anything to show up in your document, it needs to be placed between \lstinli
 \section{Chapters and sections}
 To structure your document, use \LaTeX{} commands to create chapters and sections. A chapter is created using \lstinline$\chapter{text}$ and a section with \lstinline$\section{text}$. Chapters start on a new page and are divided into sections and are numbered as such. For more levels of structure, you can use \lstinline$\subsection{text}$ and \lstinline$\subsubsection{text}$. To prevent a chapter from showing up in the table of contents use \lstinline$\chapter*{text}$ and equivalently for sections etc.
 
-Create three chapters, \enquote{Abstract}, \enquote{Introduction} and \enquote{Theory}. Make sure the abstract isn't listed in the table of contents. Make some sections in the introduction in order to understand the concepts. Add the line \lstinline$\tableofcontents$ just after \lstinline$\begin{document}$ to generate a table of contents. 
+Create three chapters, \enquote{Abstract}, \enquote{Introduction} and \enquote{Theory}. Make sure the abstract isn't listed in the table of contents. Make some sections in the introduction in order to understand the concepts. Add the line \lstinline$\tableofcontents*$ just after \lstinline$\begin{document}$ to generate a table of contents. 
 
 Fill out the document with some text to see how it looks. Use your own or generate some dummy text using \url{http://www.lipsum.com/}. Your document should look something like this:
 
@@ -59,7 +59,7 @@ Fill out the document with some text to see how it looks. Use your own or genera
 \begin{lstlisting}
 \documentclass{memoir}
 \begin{document}
-\tableofcontents
+\tableofcontents*
 \chapter*{Abstract}
 content of abstract
 \chapter{Introduction}
@@ -88,7 +88,7 @@ To make bullet points, add the following to your document:
 To have a numbered list, replace \texttt{itemize} with \texttt{enumerate}. Try adding a list of bullet points somewhere in your introduction.
 
 \section{Adding some formatting}
-Everything before \lstinline$\begin{document}$ is generally used to define some general characteristics about your document. This part of the document is known as the \emph{preamble}. Try adding the following lines to your document (after \lstinline$\documentclass$ and before \lstinline$\begin{document}$:
+Everything before \lstinline$\begin{document}$ is generally used to define some general characteristics about your document. This part of the document is known as the \emph{preamble}. Try adding the following lines to your document (after \lstinline$\documentclass$ and before \lstinline$\begin{document}$):
 
 \begin{quote}
 \begin{lstlisting}
@@ -132,7 +132,7 @@ Add the following lines to the \emph{preamble}:
 And add the command \lstinline$\maketitle$ just after \lstinline$\begin{document}$. If you want the title to be on its own page, add \lstinline$\clearpage$ after \lstinline$\maketile$
 
 \section{Collaborative work}
-In order to comfortably collaborate on a report, it can be advantageous to split the document up in a number of files, so people can work on different things without interrupting each other. A great way to do this is by using the \texttt{subfile} package. First load the package by adding \lstinline$\usepackage{subfile}$ to the preamble. We now want to load the three chapters from earlier into three separate files. Create \texttt{abstract.tex}, \texttt{intro.tex}, \texttt{theory.tex}. These \emph{subfiles} are structured in the following way:
+In order to comfortably collaborate on a report, it can be advantageous to split the document up in a number of files, so people can work on different things without interrupting each other. A great way to do this is by using the \texttt{subfile} package. First load the package by adding \lstinline$\usepackage{subfiles}$ to the preamble. We now want to load the three chapters from earlier into three separate files. Create \texttt{abstract.tex}, \texttt{intro.tex}, \texttt{theory.tex}. These \emph{subfiles} are structured in the following way:
 
 \begin{quote}
 \begin{lstlisting}
@@ -150,7 +150,7 @@ In \texttt{main.tex}, our original file, the subfiles are then loaded using the 
 \documentclass[a4paper, oneside]{memoir}
 \usepackage{geometry}
 \usepackage{microtype}
-\usepackage{subfile}
+\usepackage{subfiles}
 \usepackage[english]{babel}
 \setlength\parskip{0.1 cm}
 \setlength\parindent{0pt}
@@ -160,7 +160,7 @@ In \texttt{main.tex}, our original file, the subfiles are then loaded using the 
 
 \begin{document}
 \maketitle
-\tableofcontents
+\tableofcontents*
 \subfile{abstract.tex}
 \subfile{intro.tex}
 \subfile{theory.tex}
