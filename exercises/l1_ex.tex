@@ -17,7 +17,7 @@
     basicstyle=\ttfamily,
     keywordstyle=\color{blue},
     identifierstyle=\color{black},
-    morekeywords={chapter, subsection, subsubsection, chapterstyle}
+    morekeywords={chapter, subsection, subsubsection, chapterstyle, maketitle}
 }
 
 
@@ -53,6 +53,19 @@ Create three chapters, \enquote{Abstract}, \enquote{Introduction} and \enquote{T
 Fill out the document with some text to see how it looks. Use your own or generate some dummy text using \url{http://www.lipsum.com/}
 
 \section{Bullet points}
+To make bullet points, add the following to your document:
+
+\begin{quote}
+\begin{lstlisting}
+\begin{itemize}
+\item item 1
+\item item 2
+\item item 3
+\end{itemize}
+\end{lstlisting}
+\end{quote}
+
+To have a numbered list, replace \texttt{itemize} with \texttt{enumerate}.
 
 \section{Adding some formatting}
 Everything before \lstinline$\begin{document}$ is generally used to define some general characteristics about your document. This part of the document is known as the \enquote{preamble}. Try adding the following lines to your document (after \lstinline$\documentclass$ and before \lstinline$\begin{document}$:
@@ -68,9 +81,21 @@ Everything before \lstinline$\begin{document}$ is generally used to define some 
 
 Also change the documentclass to \lstinline$\documentclass[a4paper,oneside]{memoir}$.
 
+\section{Adding a title}
+Add the following lines to the \emph{preamble}:
+
+\begin{quote}
+\begin{lstlisting}
+\title{Your title}
+\author{Your name}
+\end{lstlisting}
+\end{quote}
+
+And add the command \lstinline$\maketitle$ just after \lstinline$\begin{document}$. If you want the title to be on its own page, add \lstinline$\clearpage$ after \lstinline$\maketile$
+
 \section{Collaborative work}
 
-\section{Introduction toreferences}
+\section{Introduction to references}
 
 
 
