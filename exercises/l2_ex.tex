@@ -10,6 +10,8 @@
 \setlength\parskip{0.1 cm}
 \setlength\parindent{0pt}
 \usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage[version=4]{mhchem}
 
 \lstset
 {
@@ -47,7 +49,7 @@ The \texttt{\textbackslash centering} simply centers the content (as is usually 
 \end{lstlisting}
 \end{quote}
 
-The optional \texttt{width} parameter decides the width of the image. In this case it is set to 60\% of the page width. As seen earlier, we could also use centimetres as our unit of choice. In this case the image \texttt{image.png} is placed in the same directory as our \texttt{.tex} file. Usually, you would prefer to have all of the images in a subfolder. If \texttt{image.png} is placed in the subfolder \texttt{img}, the code would look like this:
+The optional \texttt{width} parameter decides the width of the image. In this case it is set to 60\% of the page width. As seen earlier, we could also use centimetres or millimetres as our unit of choice. In this case the image \texttt{image.png} is placed in the same directory as our \texttt{.tex} file. Usually, you would prefer to have all of your images in a subfolder. If \texttt{image.png} is placed in the subfolder \texttt{img}, the code would look like this:
 
 \begin{quote}
 \begin{lstlisting}
@@ -55,10 +57,10 @@ The optional \texttt{width} parameter decides the width of the image. In this ca
 \end{lstlisting}
 \end{quote}
 
-Try adding a figure (with an image) to your document and refer to its given label by using the \texttt{ref} command as in Lesson one. The \texttt{includegraphics} command supports a variety of file types, so most images will work.
+Try adding a figure (with an image) to your document and refer to its given label by using the \texttt{ref} command as in lesson one. The \texttt{includegraphics} command supports a variety of file types, so most images will work.
 
 \section{Tables}
-Tables function very similar to Figures. The main difference is that table captions are usually places above the actual table (rather than below the image when using figures). The piece of code to create a table becomes:
+Tables function very similar to Figures. The main difference is that table captions are usually placed above the actual table (rather than below the image when using figures). To create a table write:
 
 \begin{quote}
 \begin{lstlisting}
@@ -97,10 +99,19 @@ Before we begin, load the package \texttt{amsmath} by adding \lstinline$\usepack
 \end{lstlisting}
 \end{quote}
 
-This also provides us with a method to easily reference variables, such as the mass $m$ (by writing \texttt{\$m\$}), in our text. As the example shows, the \^ character is used to give variables exponents. Mathematics is generally done by using various pieces of code to represent the equations that we want. I have supplied a few examples in the following table:
+This also provides us with a method to easily reference variables, such as the mass $m$ (by writing \texttt{\$m\$}), in our text. As the example shows, the `\lstinline$^$' character is used to give variables exponents. Mathematics is generally done by using various pieces of code to represent the equations that we want. I have supplied a few examples in the following table:
 
 \begin{quote}
-table here
+\begin{tabular}{cl}
+\toprule 
+$\frac{a}{b}$ & \lstinline$\frac{a}{b}$ \vspace{2 mm} \\
+$a \cdot b$ & \lstinline$a \cdot b$ \vspace{2 mm} \\   
+$a^b$ & \lstinline$a^{b}$ \vspace{2 mm} \\ 
+$\sqrt{a}$ & \lstinline$\sqrt{a}$ \vspace{2 mm} \\
+$\displaystyle\int_a^b x dx$ & \lstinline$\int_{a}^{b} x dx$ \vspace{ 2mm} \\
+$\displaystyle\sum_{i=1}^{N} i$ & \lstinline$\sum_{i=1}^{N} i$ \\
+\bottomrule
+\end{tabular} 
 \end{quote}
 
 Texmaker has a \enquote{Math} menu that can help you out as well. As you may have noticed, there is a lot of things you can do with mathematics in \LaTeX{}, so I encourage you to explore on your own. Google can be very helpful! To have a labelled equation on its own line, use the following piece of code:
@@ -124,11 +135,59 @@ To reference the equation use \lstinline$\eqref{eq:myequation}$. To align more t
 \end{lstlisting}
 \end{quote}
 
-Notice how \& dictates where to align the two equations and how \lstinline$\\$ makes sure the two equations are on separate lines. Play around with making different formulas and equations -- maybe even something you need for a project. It can be a bit daunting at first, but try to work through it!
+Notice how \texttt{`\&'} dictates where to align the two equations and how \lstinline$\\$ makes sure the two equations are on separate lines. Finally, to create a matrix use the following code:
+
+\begin{quote}
+\begin{lstlisting}
+\[ A = \begin{pmatrix}
+a_{11} & a_{12} \\ a_{21} & a_{22}
+\end{pmatrix} \]
+\end{lstlisting}
+\end{quote}
+
+to create
+
+\[ A = \begin{pmatrix}
+a_{11} & a_{12} \\ a_{21} & a_{22}
+\end{pmatrix} \]
+
+Play around with making different formulas and equations -- maybe even something you need for a project. It can be a bit daunting at first, but try to work through it! To test your skills, try creating the following set of equations in your document:
+
+\begin{align*}
+\Psi(x, 0) &= \sum_{n=1}^{\infty} c_n \psi_n (x) \\
+c_n &= \sqrt{\frac{2}{a}} \int_0^a \sin \left( \frac{n\pi}{a} x \right) \Psi(x, 0) dx
+\end{align*}
+
+The sine function is displayed using `\lstinline$\sin$'. This changes the font so we don't confuse it with a product of three variables. To make sure the parenthesis are stretched vertically, use `\lstinline$\left($' and `\lstinline$\right)$' rather than just `\texttt{(}' and `\texttt{)}'. The Greek letters in the above equation are `\lstinline$\pi$', `\lstinline$\psi$' and `\lstinline$\Psi$'.
 
 \section{Units}
+When writing projects in the natural sciences, it is often necessary to write physical units in a variety of contexts. To make this process a little more manageable in \LaTeX{}, we can use the \texttt{siunitx} package. After loading the package in your preamble with \lstinline$\usepackage{siunitx}$, we can represent units using the \lstinline$\si{}$ command. As an example, to write:
 
-\section{Chemical formulas}
+\[ g = 9.8 \si{\metre\per\square\second} \]
 
+use the code
+
+\begin{quote}
+\begin{lstlisting}
+\[ g = 9.8 \si{\metre\per\square\second} \]
+\end{lstlisting}
+\end{quote}
+
+or
+
+\begin{quote}
+\begin{lstlisting}
+\[ g = 9.8 \si{ms^(-2}} \]
+\end{lstlisting}
+\end{quote}
+
+The \texttt{siunitx} package has a ton of options for typesetting physical units and numbers in general. The full documentation can be found at \url{https://www.ctan.org/pkg/siunitx}
+
+\section{Chemical formulae}
+To typeset chemical molecular formulae and equations, we can make use of the \texttt{mhchem} package. First, load it in your preamble using \lstinline$\usepackage[version=4]{mhchem}$. Now we can typeset chemical equations using the \lstinline$\ce{}$ command. To write \ce{H2O}, simply write \lstinline$\ce{H20}$. For a reaction, use \texttt{->} as the \enquote{arrow}. For example, to output
+
+\[ \ce{CO2 + C -> 2 CO} \]
+
+simply write \lstinline$\ce{CO2 + C -> 2 CO}$. Similar to the \texttt{siunitx} pacakge, the \texttt{mhchem} package is quite extensive, and can typeset a wide variety of chemical formulas. See the documentation at \url{https://www.ctan.org/pkg/mhchem} for further details.
 
 \end{document}
