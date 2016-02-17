@@ -1,0 +1,134 @@
+\documentclass[a4paper,oneside]{memoir}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage{geometry}
+\usepackage{url}
+\counterwithout{section}{chapter}
+\usepackage{xcolor}
+\usepackage{listings}
+\setlength\parskip{0.1 cm}
+\setlength\parindent{0pt}
+\usepackage{amsmath}
+
+\lstset
+{
+    language=[LaTeX]TeX,
+    breaklines=true,
+    basicstyle=\ttfamily,
+    keywordstyle=\color{blue},
+    identifierstyle=\color{black},
+    morekeywords={chapter, subsection, subsubsection, chapterstyle, maketitle, setlength,
+    			  tableofcontents, subfile}
+}
+
+
+\begin{document}
+
+\section{Figures}
+Making figures in \LaTeX{} is somewhat different from other word processors. Rather than placing the figure ourselves, the best practice is usually to let \LaTeX{} chose the placement. For that reason, we also tend to refer to figures by their label rather than writing something like \enquote{\dots as seen in the figure below}. The code for including a figure looks something like this:
+
+\begin{quote}
+\begin{lstlisting}
+\begin{figure}
+\centering
+Figure Content
+\caption{My figure caption.}
+\label{fig:myfigure}
+\end{figure}
+\end{lstlisting}
+\end{quote}
+
+The \texttt{\textbackslash centering} simply centers the content (as is usually desired). This piece of code is typically placed after the paragraph where we first reference the figure. In the above code, the figure content is just text. To include an image, we first need to load the package \texttt{graphicx} in the preamble with the command \lstinline$\usepackage{graphicx}$. We can now replace \enquote{Figure Content} with
+
+\begin{quote}
+\begin{lstlisting}
+\includegraphics[width=0.6\textwidth]{image.png}
+\end{lstlisting}
+\end{quote}
+
+The optional \texttt{width} parameter decides the width of the image. In this case it is set to 60\% of the page width. As seen earlier, we could also use centimetres as our unit of choice. In this case the image \texttt{image.png} is placed in the same directory as our \texttt{.tex} file. Usually, you would prefer to have all of the images in a subfolder. If \texttt{image.png} is placed in the subfolder \texttt{img}, the code would look like this:
+
+\begin{quote}
+\begin{lstlisting}
+\includegraphics[width=0.6\textwidth]{img/image.png}
+\end{lstlisting}
+\end{quote}
+
+Try adding a figure (with an image) to your document and refer to its given label by using the \texttt{ref} command as in Lesson one. The \texttt{includegraphics} command supports a variety of file types, so most images will work.
+
+\section{Tables}
+Tables function very similar to Figures. The main difference is that table captions are usually places above the actual table (rather than below the image when using figures). The piece of code to create a table becomes:
+
+\begin{quote}
+\begin{lstlisting}
+\begin{table}
+\centering
+\caption{My table caption.}
+\label{tab:mytable}
+Table Content
+\end{table}
+\end{lstlisting}
+\end{quote}
+
+To create the \emph{actual} table to be placed at \enquote{Table Content}, we use the \emph{tabular} environment. As the code to type it in manually can be a little cumbersome, we will make use of the Texmaker wizard. In the menubar of Texmaker, go to \enquote{Wizard} and then \enquote{Quick Tabular}. This gives you an interface to design the content and look of your table. If you are using a different editor from Texmaker, I recommend going to \url{http://www.tablesgenerator.com/} and using the interface there to create your code. The latter also supports the \texttt{booktabs} package, which improves the aesthetics of your tables.
+
+Try creating a table using one of the above methods and add it to your document. Remember to reference it somewhere! While the details of the tabular environment has not been explained here, it should be somewhat apparent after using one of the wizards. To convert Excel sheets to \LaTeX{} tables you can use the plugin found at \url{https://www.ctan.org/pkg/excel2latex}.
+
+\section{Mathematics}
+Mathematics in \LaTeX{} can be used both inline, such as $E = mc^2$, or on a line with an equation number:
+
+\begin{equation}
+\sum_{i=1}^{n} i = \frac{(n+1)n}{2}
+\end{equation}
+
+or as a number of aligned equations:
+
+\begin{align*}
+\frac{dx}{dt} &= - A \omega \sin(\omega t + \theta) \\
+\frac{d^2 x}{dt^2} &= - A \omega^2 \cos(\omega t + \theta)
+\end{align*}
+
+Before we begin, load the package \texttt{amsmath} by adding \lstinline$\usepackage{amsmath}$ to your preamble. Inline mathematics is written as a part of your text by surrounding the math code with the \$ character:
+
+\begin{quote}
+\begin{lstlisting}
+... such as $E = mc^{2}$, or on a ...
+\end{lstlisting}
+\end{quote}
+
+This also provides us with a method to easily reference variables, such as the mass $m$ (by writing \texttt{\$m\$}), in our text. As the example shows, the \^ character is used to give variables exponents. Mathematics is generally done by using various pieces of code to represent the equations that we want. I have supplied a few examples in the following table:
+
+\begin{quote}
+table here
+\end{quote}
+
+Texmaker has a \enquote{Math} menu that can help you out as well. As you may have noticed, there is a lot of things you can do with mathematics in \LaTeX{}, so I encourage you to explore on your own. Google can be very helpful! To have a labelled equation on its own line, use the following piece of code:
+
+\begin{quote}
+\begin{lstlisting}
+\begin{equation}\label{eq:myequation}
+\sum_{i=1}^{n} i = \frac{(n+1)n}{2}
+\end{equation}
+\end{lstlisting}
+\end{quote}
+
+To reference the equation use \lstinline$\eqref{eq:myequation}$. To align more than one equation, the following code creates two equations aligned at \texttt{`='}.
+
+\begin{quote}
+\begin{lstlisting}
+\begin{align*}
+\frac{dx}{dt} &= - A \omega \sin(\omega t + \theta) \\
+\frac{d^2 x}{dt^2} &= - A \omega^2 \cos(\omega t + \theta)
+\end{align*}
+\end{lstlisting}
+\end{quote}
+
+Notice how \& dictates where to align the two equations and how \lstinline$\\$ makes sure the two equations are on separate lines. Play around with making different formulas and equations -- maybe even something you need for a project. It can be a bit daunting at first, but try to work through it!
+
+\section{Units}
+
+\section{Chemical formulas}
+
+
+\end{document}
