@@ -1,0 +1,157 @@
+\documentclass[a4paper,oneside]{memoir}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage{geometry}
+\usepackage{url}
+\counterwithout{section}{chapter}
+\usepackage{xcolor}
+\usepackage{listings}
+\setlength\parskip{0.1 cm}
+\setlength\parindent{0pt}
+\usepackage{amsmath}
+
+\lstset
+{
+    language=[LaTeX]TeX,
+    breaklines=true,
+    basicstyle=\ttfamily,
+    keywordstyle=\color{blue},
+    identifierstyle=\color{black},
+    morekeywords={chapter, subsection, subsubsection, chapterstyle, maketitle, setlength,
+    			  tableofcontents, subfile, cleartorecto}
+}
+
+
+\begin{document}
+
+\section{Bibliography}
+Bibliography in \LaTeX{} can be done in a variety of ways, but a popular way of handling it is using the \texttt{natbib} package. As usual, the package is loaded by adding \lstinline$\usepackage{natbib}$ in the preamble. Before we can begin using citations in our document, we need a bibliography database. Create a file in the same path as your \texttt{.tex} document called \texttt{bibliography.bib}. Open the file with TexMaker and add the following:
+
+\begin{verbatim}
+@article{matsen:96,
+  title={Unifying weak-and strong-segregation block copolymer theories},
+  author={Matsen, MW and Bates, Frank S},
+  journal={Macromolecules},
+  volume={29},
+  number={4},
+  pages={1091--1098},
+  year={1996},
+  publisher={ACS Publications}
+}
+\end{verbatim}
+
+Save the file. We now have one entry in our bibliography database. The important bits of the entry is the first line, where the label is defined; in this case \texttt{matsen:96}. Furthermore the \texttt{@article} statement tells bibtex that the entry is an article. The following lines simply tells BibTeX the details about the article. It is important to note that some of these fields are required. In the case of an article, the title, author, journal and year must be filled out.
+
+To cite the article, use the command \lstinline$\citep{matsen:96}$ in your text. To display the bibliography in your document add the following two lines right \emph{before} \lstinline$\end{document}$:
+
+\begin{quote}
+\begin{lstlisting}
+\bibliographystyle{unsrt}
+\bibliography{mybib}
+\end{lstlisting}
+\end{quote}
+
+To make the bibliography appear, we need to run BibTeX. In Texmaker this is done by going to \enquote{Tools} $\rightarrow$ \enquote{BibTeX} in the menu bar. As with references, we usually need to run our \LaTeX{} commands in a certain order before everything works. In the case of BibTeX, the procedure is generally:
+
+\begin{enumerate}
+\item Quick Build
+\item BibTeX
+\item Quick Build
+\item Quick Build
+\end{enumerate}
+
+After running these four commands, the citation along with the bibliography should appear as expected in your document. Note that citations only appear in your bibliography if it was actually used in your document. If you want every entry to appear in the bibliography, add \lstinline$\nocite{*}$ before \lstinline$\bibliographystyle$.
+
+In the example used here, citations in your document are simply numbers in square brackets (e.g. [1]) and the bibliography is ordered by how they appear in your document. This is the standard in many technical disciplines. The style of your citations are chosen with the \lstinline$\bibliographystyle{}$ command. If you change this to
+
+\begin{quote}
+\lstinline$\bibliographystyle{plainnat}$
+\end{quote}
+
+You will get citations in the format [Author et al., Year], which is desirable in some publications. To get round parenthesis in this style, change \lstinline$\usepackage{natbib}$ to \lstinline$\usepackage[round]{natbib}$ in the preamble (note that this creates an error if used with the \texttt{unsrt} style). There are many ways to customize the look of your citations. For a more complete overview of how natbib works, I suggest the following guide:
+
+\begin{quote}
+\url{https://www.sharelatex.com/learn/Bibliography_management_with_natbib}
+\end{quote}
+
+Sometimes you may want to indicate a page or chapter in the cited work. This can be done by adding a custom argument to \lstinline$\citep$. For example, if you have a book with the label \texttt{mybook} in your bibtex database and you want to cite chapter 3, you would write \lstinline$\citep[Chapter 3]{mybook}$.
+
+While working with bibliographies may seem daunting at first, remember that you only need to think about every entry once. There is, however, some shortcuts to adding entries to your database. Google scholar (\url{http://scholar.google.com/}) along with the majority of journals have an option to export a citation to BibTeX. Try finding a citation on Google Scholar and add it to your BibTeX database.
+
+Finally, I will adress the problem of citing websites. There is, in my opinion, no \enquote{proper} way of citing webpages in BibTeX. My solution is to make the entry as follows:
+
+\begin{verbatim}
+@misc{gisaxs.de,
+author = {Dr. Andreas Meyer},
+year = 2011,
+howpublished = {\url{http://gisaxs.de/theory.html}},
+note = {Website accessed on 09-07-2015}
+}
+\end{verbatim}
+
+Note that this requires the \texttt{url} package to be loaded in your preamble with the command \lstinline$\usepackage{url}$.
+
+\section{Titling Page}
+So far we've been using the \lstinline$\maketitle$ command to make titling pages for our documents. While this works great in many cases, such as small reports, it may be desirable with a little more flexibility. For this purpose, \LaTeX{} has the \texttt{titlingpage} environment. Below is a block of code that creates a, somewhat basic, titling page for a project.
+
+\begin{quote}
+\begin{lstlisting}
+\begin{titlingpage}
+\centering
+\vspace{1cm}
+\hrule
+\vspace{1cm}
+\huge \textsf{Project Title}
+\vspace{8mm}
+\hrule
+\vspace{1cm}
+\textbf{by: Your Name(s)}
+\vfill
+\small Supervisor: Your Supervisor
+\vspace{1cm}
+\textsc{nth semester project\\ \today} \\
+\textsc{\textsc{Roskilde University}}
+\end{titlingpage}
+\end{lstlisting}
+\end{quote}
+
+Usually the \texttt{titlingpage} environment is placed following \lstinline$\begin{document}$. In making this titling page, I have taken advantage of several different font sizes using the commands \lstinline$\Huge$, \lstinline$\normalsize$ and \lstinline$\small$. It is important to note that whenever one of these commands are used, it is applied to everything following the command \emph{while staying in the current environment}. The \lstinline$\centering$ command works in the same way. The \lstinline$\hrule$ command creates a horizontal bar, \lstinline$\textsc{}$ creates text using \textsc{small caps} and \lstinline$\textsf{}$ makes text with \textsf{sans-serif}. The way they are used in this titling page is entirely personal preference.
+
+The \lstinline$\vspace{}$ command creates vertical space in your document and \lstinline$\vfill$ fills out vertical space to span the page. In this example, \lstinline$\vfill$ dictates where the \enquote{big empty space} is. Finally \lstinline$\today$ simply outputs the current date formatted according to the language set by the \texttt{babel} package.
+
+\section{Controlling page numbering}
+By default, \LaTeX{} starts numbering pages right after \lstinline$\begin{document}$ while ignoring any titling pages. This is fine in most cases, but you may want a little more control. A popular way is using roman numerals for every page before the first chapter and then switching to arabic numbers for the rest of your document. As an example, you could structure the first part of your document as follows:
+
+\begin{quote}
+\begin{lstlisting}
+\begin{document}
+\begin{titlingpage}
+titlingpage
+\end{titlingpage}
+\pagenumbering{roman}
+\chapter*{Abstract}
+\chapter*{Acknowledgements}
+\cleartorecto
+\tableofcontents*
+\clearpage
+\pagenumbering{arabic}
+\chapter{Introduction}
+...
+\end{lstlisting}
+\end{quote}
+
+Here I introduced two new commands. \lstinline$\cleartorecto$ clears the page to the first page on the right. This makes sure that the table of contents starts on the right when creating a two-sided document. Similarly, \lstinline$\clearpage$ simply goes to the next page. These may be useful in other contexts as well.
+
+\section{Resources}
+This concludes our short introduction to project-writing using \LaTeX{}. We hope it was comprehensive enough to get you started on writing your own projects without too many hurdles. If not, the internet is a great resource and it is easy to get help simply by typing your question into Google. There are, however, a few resources worth emphasizing.
+
+\begin{itemize}
+\item \url{https://en.wikibooks.org/wiki/LaTeX} is a comprehensive resource covering basically every aspect of \LaTeX{}. This is a great way to start if you are having problems understanding a certain aspect of \LaTeX{}.
+\item \url{https://www.sharelatex.com/} is a tool for working collaboratively on \LaTeX{} documents using an online editor. This allows you to get started without a local \LaTeX{} installation. The free option only allows for one collaborator on a project. Their documentation is excellent for beginners as well!
+\item \url{https://www.overleaf.com/} is similar to ShareLaTeX and allows unlimited collaborators on their free version.
+\item For the Danes, there is a collection of \LaTeX{} document classes developed at Roskilde University. These can be found at \url{http://dirac.ruc.dk/imfufalatex/}. The introduction to \LaTeX{} and IMFUFA-\LaTeX{} provided at the same URL is highly recommended for beginners, even if you don't plan to use IMFUFA-\LaTeX{}.
+\item \url{http://tex.stackexchange.com/} is the go-to forum for asking specific questions about \LaTeX{}. The majority of your Google searches regarding \LaTeX{} will take you here.
+\end{itemize}
+
+\end{document}
